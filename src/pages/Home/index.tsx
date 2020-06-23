@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
+import api from '../../services/api';
 
 interface Joke {
     id: number,
@@ -11,15 +12,19 @@ interface Joke {
 
 const Home = () => {
     const [joke, setJoke] = useState<Joke>({} as Joke);
-
-    function handleJoke() {
-        setJoke({ type: Math.random().toString(36).substring(7) } as Joke)
+    
+    function generateJoke() {
+        api.get(`random_joke`).then(res => {
+            setJoke(res.data);
+        });
     }
 
     return (
         <View>
             <Text>{joke.type}</Text>
-            <RectButton style={styles.button} onPress={handleJoke} >
+            <Text>{joke.setup}</Text>
+            <Text>{joke.punchline}</Text>
+            <RectButton style={styles.button} onPress={generateJoke} >
                 <Text style={styles.buttonText}>Generate joke</Text>
             </RectButton>
         </View>)
