@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
+import { useNavigation } from "@react-navigation/native";
 import api from '../../services/api';
 
 interface Joke {
@@ -12,11 +13,16 @@ interface Joke {
 
 const Home = () => {
     const [joke, setJoke] = useState<Joke>({} as Joke);
-    
+    const navigation = useNavigation();
+
     function generateJoke() {
         api.get(`random_joke`).then(res => {
             setJoke(res.data);
         });
+    }
+
+    function navigationToCamera() {
+        navigation.navigate('Camera')
     }
 
     return (
@@ -26,7 +32,10 @@ const Home = () => {
             <Text style={styles.joke}>{joke.punchline}</Text>
             <View style={styles.center}>
             <RectButton style={styles.button} onPress={generateJoke} >
-                <Text style={styles.buttonText}>Generate joke</Text>
+                <Text style={styles.buttonText}>Gerar piada</Text>
+            </RectButton>
+            <RectButton style={styles.button} onPress={navigationToCamera} >
+                <Text style={styles.buttonText}>Tirar foto</Text>
             </RectButton>
             </View>
         </View>)
@@ -51,6 +60,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#f95738',
         borderRadius: 10,
         height: 50,
+        marginBottom: 10,
         
         flexDirection: 'row',
         justifyContent: 'center',
