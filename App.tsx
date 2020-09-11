@@ -1,13 +1,11 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
-import Routes from './src/routes';
+import AppStack from './src/routes/AppStack';
 
 export default function App() {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor="trasparent" translucent />
-      <Routes />
+      <AppStack />
     </>
   );
 }

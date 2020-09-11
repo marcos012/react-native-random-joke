@@ -25,6 +25,10 @@ const Home = () => {
         navigation.navigate('Camera')
     }
 
+    function navigationToAgroPocket() {
+        navigation.navigate('AgroPocket')
+    }
+
     return (
         <View>
             <Text style={styles.type}>{joke.type}</Text>
@@ -36,6 +40,9 @@ const Home = () => {
             </RectButton>
             <RectButton style={styles.button} onPress={navigationToCamera} >
                 <Text style={styles.buttonText}>Tirar foto</Text>
+            </RectButton>
+            <RectButton style={styles.button} onPress={navigationToAgroPocket} >
+                <Text style={styles.buttonText}>Agro Pocket</Text>
             </RectButton>
             </View>
         </View>)
